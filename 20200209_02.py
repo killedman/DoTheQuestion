@@ -31,18 +31,23 @@
 
 
 class Solution:
+    # 这个题看别人的解释，实际是一个斐波那契数列
+    # f(n) = f(n-1) + f(n-2)
+    # 直接使用斐波那契数列的数列，比如：1,1,2,3,5,8...
+    # 效率比原先直接使用递归提高了很多
     def climbStairs(self, n: int) -> int:
-        if n == 1:
-            return 1
-        elif n == 2:
-            return 2
-        else:
-            while n > 2:
-                return self.climbStairs(n - 1) + self.climbStairs(n - 2)
+        if n < 3:
+            return n
+        left = 1
+        right = 2
+        for i in range(3, n+1):
+            left, right = right, left + right
+        return right
+
 
 
 
 if __name__ == "__main__":
     solution = Solution()
-    result = solution.climbStairs(33)
+    result = solution.climbStairs(35)
     print(result)
