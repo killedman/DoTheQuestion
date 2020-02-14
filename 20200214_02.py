@@ -25,10 +25,19 @@ from typing import List
 
 
 class Solution:
+
     def singleNumber(self, nums: List[int]) -> int:
-        for i in nums:
-            if nums.count(i) == 1:
-                return i
+        # for i in nums:
+        #     if nums.count(i) == 1:
+        #         return i
+        # 以下方法针对测试时超出时间限制进行了优化
+        new_nums = sorted(nums)
+        while new_nums:
+            first = new_nums[0]
+            if new_nums.count(first) == 2:
+                new_nums = new_nums[2:]
+            elif new_nums.count(first) == 1:
+                return first
 
 
 if __name__ == "__main__":
