@@ -27,25 +27,20 @@ class Solution:
     def trailingZeroes(self, n: int) -> int:
         if n < 1:
             return 0
-        out_num = 0
         multi_nu_list = list(range(1, n+1))
         while len(multi_nu_list) >= 2:
             multi_nu_list[0] = multi_nu_list[0] * multi_nu_list[1]
             multi_nu_list.pop(1)
         multi_result = str(multi_nu_list[0])
-        # print(multi_result)
-        while True:
-            if int(multi_result[-1]) == 0:
-                multi_result = multi_result[:-1]
-                out_num += 1
-            elif int(multi_result[-1]) != 0:
-                break
-        return out_num
-
+        tmp_index = []
+        for i in range(1, 9):
+            if multi_result.rfind(str(i)) > -1:
+                tmp_index.append(multi_result.rfind(str(i)))
+        return len(multi_result) - 1 - max(tmp_index)
 
 if __name__ == "__main__":
-    # 当数字是7340时，会超过leetcode的时间限制；
-    num = 7340
+    # 解决7304的超时问题后，数字是7563时，会超过leetcode的时间限制；
+    num = 7563
     solution = Solution()
     result = solution.trailingZeroes(num)
     print(result)
